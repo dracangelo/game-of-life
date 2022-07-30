@@ -1,6 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
+
+class Grid extends React.Component {
+  render() {
+    return (
+      <div>
+        GRID
+      </div>
+    )
+  }
+}
 
 class Main extends React.Component {
   constructor() {
@@ -15,7 +25,7 @@ class Main extends React.Component {
       <div>
         <h1>Game of life</h1>
         <Grid
-          
+
         />
         <h2>Generation: {this.state.generation}</h2>
       </div>
