@@ -1,11 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
+
 
 class Box extends React.Component {
   selectBox = () => {
-    this.props.selectBox(this.props.row, this.props.col);
-  };
+		this.props.selectBox(this.props.row, this.props.col);
+	}
 
   render() {
     return (
@@ -18,37 +19,36 @@ class Box extends React.Component {
   }
 }
 class Grid extends React.Component {
-  render() {
-    const width = (this.props.cols *16) +1;
-    var rowsArr = [];
+	render() {
+		const width = (this.props.cols * 14);
+		var rowsArr = [];
 
-    var boxClass = "";
-    for (var i = 0; i < this.props.rows; i++) {
-      for (var j = 0; j < this.props.rows; j++) {
-        let boxId = i + "_" + j;
-        boxClass = this.props.gridFull[i][j] ? "box on" : "box off";
-        rowsArr.push(
-          <Box
-          boxClass={boxClass}
-          key={boxId}
-          boxId={boxId}
-          rows={i}
-          cols={j}
-          selectBox={this.props.selectBox}
-          />
+		var boxClass = "";
+		for (var i = 0; i < this.props.rows; i++) {
+			for (var j = 0; j < this.props.cols; j++) {
+				let boxId = i + "_" + j;
 
-        );
-      }
+				boxClass = this.props.gridFull[i][j] ? "box on" : "box off";
+				rowsArr.push(
+					<Box
+						boxClass={boxClass}
+						key={boxId}
+						boxId={boxId}
+						row={i}
+						col={j}
+						selectBox={this.props.selectBox}
+					/>
+				);
+			}
+		}
 
-    }
-    return (
-      <div className='grid' style={{width:width}}>
-        {rowsArr}
-      </div>
-    )
-  }
+		return (
+			<div className="grid" style={{width: width}}>
+				{rowsArr}
+			</div>
+		);
+	}
 }
-
 class Main extends React.Component {
   constructor() {
     super();
@@ -62,6 +62,14 @@ class Main extends React.Component {
       gridFull: Array(this.rows).fill().map(() => Array(this.cols).fill(false))
     };
   }
+
+  selectBox = (row, col) => {
+		let gridCopy = arrayClone(this.state.gridFull);
+		gridCopy[row][col] = !gridCopy[row][col];
+		this.setState({
+			gridFull: gridCopy
+		});
+	}
   
   render() {
     return (
@@ -79,4 +87,14 @@ class Main extends React.Component {
   }
 }
 
-ReactDOM.render(<Main/>, document.getElementById('root'));
+function arrayClone(arr) {
+	return JSON.parse(JSON.stringify(arr));
+}
+// ReactDOM.render(<Main/>, document.getElementById('root'));
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <Main />
+  </React.StrictMode>
+);
