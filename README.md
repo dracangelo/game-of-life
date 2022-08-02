@@ -1,3 +1,14 @@
+# about the app
+this is a react based game of life game app. more on the game here:https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+
+you can also play the game yourself here: https://dracangelo.github.io/game-of-life
+
+# live link
+https://dracangelo.github.io/game-of-life
+
+# known bugs
+have to pause the gameto change grid size and start a new game for a new gen count
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
